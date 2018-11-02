@@ -113,33 +113,33 @@ void loadData(string filePath, vector<vector<double> >& data) {
     double value;
     
     getline(fs,line);
-  stringstream parsed(line);
-  
-  // Prep vectors...
-  while (!parsed.eof()) {
-    parsed >> value;
-    data.push_back(std::vector<double>());
-  }
-  
-  while (!fs.eof()) {
     stringstream parsed(line);
-    for (int i = 0; i < data.size(); i++) {
-      parsed >> value;
-      data[i].push_back(value);
+    
+    // Prep vectors...
+    while (!parsed.eof()) {
+        parsed >> value;
+        data.push_back(std::vector<double>());
     }
-    getline(fs,line);
-  }
+    
+    while (!fs.eof()) {
+        stringstream parsed(line);
+        for (int i = 0; i < data.size(); i++) {
+            parsed >> value;
+            data[i].push_back(value);
+        }
+        getline(fs,line);
+    }
 
-  fs.close();
+    fs.close();
 }
 
 void printData(vector<vector<double> > data) {
-  for (int j = 0; j < data[0].size(); j++) {
-    for (int i = 0; i < data.size(); i++) {
+    for (int j = 0; j < data[0].size(); j++) {
+        for (int i = 0; i < data.size(); i++) {
             cout << setw(4) << data[i][j] << " ";
+        }
+        cout << endl;
     }
-    cout << endl;
-  }
 }
 
 struct node* trainDecisionTree(vector<vector<double> >& data) {
